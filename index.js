@@ -16,7 +16,10 @@ let db = null;
 const mongoClient = new MongoClient(process.env.MONGO_URI);
 const promise = mongoClient.connect();
 
-promise.then(() => console.log(chalk.blue.bold("Data Base ON")));
+promise.then(() => {
+  console.log(chalk.blue.bold("Data Base ON"));
+  db = mongoClient.db(process.env.MONGO_DB);
+});
 promise.catch((e) => console.log(chalk.red.bold("Data Base OUT", e)));
 
 
@@ -33,24 +36,33 @@ app.post("/sign-up", async (req, res) => {
 
   const signUpSchema = joi.object({
     name: joi.string().required(),
-    email: joi.email().required(),
-    password: joi.required(),
-    passwordConfirm: joi.required()
+    email: joi.string().email().required(),
+    password: joi.string().required(),
+    passwordConfirm: joi.string().required()
   });
 
   const { error } = signUpSchema.validate(signUpBody);
 
   if (error) {
-    res.status(422).send(error.details.map(error => error.message))
+    res.status(422).send(error.details.map(error => error.message));
+    return;
   }
 
   if (passwordConfirm !== password) {
     res.status(422).send("As senhas devem ser iguais");
+    return;
   }
 
   try {
+    const participantExist = await db.collection("registeredUsers").findOne({ email });
+
+    if (participantExist) {
+      res.status(409).send("Usuario já existente");
+      return;
+    }
+
     await db.collection("registeredUsers").insertOne(signUpBody);
-    res.send(201);
+    res.sendStatus(201);
 
   } catch (e) {
     console.log(chalk.red.bold(e));
