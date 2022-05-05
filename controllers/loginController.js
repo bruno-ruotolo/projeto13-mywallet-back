@@ -26,9 +26,7 @@ export async function loginUser(req, res) {
         token
       });
 
-      delete user.password;
-      delete user._id
-      res.status(200).send(user);
+      res.status(200).send(token);
 
     } else {
       res.status(400).send("Usuario/senha invalida");
