@@ -1,6 +1,6 @@
 import joi from "joi";
 
-export async function validNewEntryJoi(req, res, next) {
+export async function validTransactionJoi(req, res, next) {
   const reqBody = req.body;
 
   const newEntrySchema = joi.object({
