@@ -18,7 +18,7 @@ export async function validRegisterJoi(req, res, next) {
   });
 
   const { error } = signUpSchema.validate(signUpBody);
-  if (error) return res.status(422).send(error.details.map(error => error.message));
+  if (error) return res.status(422).send(error.details.map(detail => detail.message));
 
   next();
 }
