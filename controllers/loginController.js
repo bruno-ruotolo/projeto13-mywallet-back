@@ -8,14 +8,6 @@ import db from "../db.js"
 export async function loginUser(req, res) {
   const { email, password } = req.body;
 
-  const loginSchema = joi.object({
-    email: joi.string().email().required(),
-    password: joi.string().required()
-  });
-
-  const { error } = loginSchema.validate({ email, password });
-  if (error) return res.status(422).send(error.details.map(error => error.message));
-
   try {
     const user = await db.collection("registeredUsers").findOne({ email });
 
