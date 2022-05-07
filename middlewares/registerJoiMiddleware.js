@@ -17,7 +17,7 @@ export async function validRegisterJoi(req, res, next) {
     passwordConfirm: joi.ref("password")
   });
 
-  const { error } = signUpSchema.validate(signUpBody);
+  const { error } = signUpSchema.validate(signUpBody, { abortEarly: false });
   if (error) return res.status(422).send(error.details.map(detail => detail.message));
 
   next();

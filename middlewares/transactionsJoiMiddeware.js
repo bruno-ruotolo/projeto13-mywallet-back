@@ -8,7 +8,7 @@ export async function validTransactionJoi(req, res, next) {
     description: joi.string().required()
   });
 
-  const { error } = newEntrySchema.validate(reqBody);
+  const { error } = newEntrySchema.validate(reqBody, { abortEarly: false });
 
   if (error) return res.status(422).send(error.details.map(detail => detail.message));
 

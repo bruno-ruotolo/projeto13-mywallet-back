@@ -8,7 +8,7 @@ export async function validLoginJoi(req, res, next) {
     password: joi.string().required()
   });
 
-  const { error } = loginSchema.validate({ email, password });
+  const { error } = loginSchema.validate({ email, password }, { abortEarly: false });
   if (error) return res.status(422).send(error.details.map(error => error.message));
 
   next();

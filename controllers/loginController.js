@@ -19,7 +19,7 @@ export async function loginUser(req, res) {
         token
       });
 
-      res.status(200).send(token);
+      res.status(200).send({ token, email: user.email, name: user.name });
 
     } else {
       res.status(400).send("Usuario/senha invalida");
