@@ -21,4 +21,4 @@ app.use(homeRouter)
 app.use(transactionsRouter)
 
 //open server
-app.listen(process.env.PORT, () => console.log(chalk.green.bold("Server ON")));
+app.listen(process.env.PORT, () => console.log(chalk.green.bold("Server ON" + process.env.PORT)));
