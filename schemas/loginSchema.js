@@ -1,8 +1,7 @@
 import joi from "joi";
 
-export async function validLoginJoi(req, res, next) {
+export async function loginSchema(req, res, next) {
   const { email, password } = req.body;
-
   const loginSchema = joi.object({
     email: joi.string().email().required(),
     password: joi.string().required()

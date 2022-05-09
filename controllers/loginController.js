@@ -1,4 +1,3 @@
-import joi from "joi";
 import bcrypt from "bcrypt";
 import chalk from "chalk";
 import { v4 as uuid } from "uuid";

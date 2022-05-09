@@ -1,8 +1,7 @@
 import joi from "joi";
 
-export async function validRegisterJoi(req, res, next) {
+export async function registerSchema(req, res, next) {
   const { name, email, password, passwordConfirm } = req.body;
-
   const signUpBody = {
     name,
     email,

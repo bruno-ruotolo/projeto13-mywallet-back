@@ -1,10 +1,10 @@
 import { Router } from "express";
 
 import { loginUser } from "../controllers/loginController.js";
-import { validLoginJoi } from "../middlewares/loginJoiMiddleware.js";
+import { loginSchema } from "../schemas/loginSchema.js";
 
 const loginRouter = Router();
 
-loginRouter.post("/sign-in", validLoginJoi, loginUser);
+loginRouter.post("/sign-in", loginSchema, loginUser);
 
 export default loginRouter;
