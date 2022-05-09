@@ -12,5 +12,4 @@ try {
 } catch (e) {
   console.log(chalk.red.bold("Data Base OUT", e));
 }
-
 export default db;
